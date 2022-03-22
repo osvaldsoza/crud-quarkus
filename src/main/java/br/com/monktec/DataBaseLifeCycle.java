@@ -8,6 +8,10 @@ import java.util.Map;
 
 public class DataBaseLifeCycle implements QuarkusTestResourceLifecycleManager {
 
+    public static final String JDBC_URL = "quarkus.datasource.jdbc.url";
+    public static final String DATASOURCE_USERNAME = "quarkus.datasource.username";
+    public static final String DATASOURCE_PASSWORD = "quarkus.datasource.password";
+
     private static PostgreSQLContainer<?> POSTGRES = new PostgreSQLContainer("postgres:12.2");
 
     @Override
@@ -16,9 +20,9 @@ public class DataBaseLifeCycle implements QuarkusTestResourceLifecycleManager {
 
         Map<String,String> propriedades = new HashMap<>();
 
-        propriedades.put("quarkus.datasource.jdbc.url", POSTGRES.getJdbcUrl());
-        propriedades.put("quarkus.datasource.username", POSTGRES.getUsername());
-        propriedades.put("quarkus.datasource.password", POSTGRES.getPassword());
+        propriedades.put(JDBC_URL, POSTGRES.getJdbcUrl());
+        propriedades.put(DATASOURCE_USERNAME, POSTGRES.getUsername());
+        propriedades.put(DATASOURCE_PASSWORD, POSTGRES.getPassword());
 
         return propriedades;
     }
